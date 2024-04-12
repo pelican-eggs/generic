@@ -1,5 +1,10 @@
 # Generic Language
 
+### [Bun](bun)
+
+[bun](https://bun.sh)
+A generic Bun egg
+
 ### [C#](c%23)
 
 [C#](https://learn.microsoft.com/en-us/dotnet/csharp//)
@@ -39,11 +44,6 @@ A generic Lua (Luvit) language egg
 
 [nodejs](https://nodejs.org)
 A generic Node.JS egg
-
-### [Bun](bun)
-
-[bun](https://bun.sh)
-A generic Bun egg
 
 ### [nodemon](nodemon)
 
