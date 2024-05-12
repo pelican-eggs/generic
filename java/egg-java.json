@@ -40,7 +40,7 @@
             "default_value": "sneakyhub.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "required|string|max:50",
             "field_type": "text"
         }
     ]
