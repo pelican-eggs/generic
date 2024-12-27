@@ -11,6 +11,8 @@
     "description": "a generic node.js egg\r\n\r\nThis will clone a git repo. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
     "features": null,
     "docker_images": {
+        "Nodejs 23": "ghcr.io\/parkervcp\/yolks:nodejs_23",
+        "Nodejs 22": "ghcr.io\/parkervcp\/yolks:nodejs_22",
         "Nodejs 21": "ghcr.io\/parkervcp\/yolks:nodejs_21",
         "Nodejs 20": "ghcr.io\/parkervcp\/yolks:nodejs_20",
         "Nodejs 19": "ghcr.io\/parkervcp\/yolks:nodejs_19",
