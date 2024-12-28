@@ -1,16 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
-        "version": "PTDL_v2",
+        "version": "PLCN_v1",
         "update_url": null
     },
-    "exported_at": "2024-06-02T14:43:52+00:00",
+    "exported_at": "2024-12-28T09:14:31+00:00",
     "name": "python generic",
     "author": "parker@parkervcp.com",
     "uuid": "cbd15054-262b-4183-82e9-462c3894175b",
     "description": "A Generic Python Egg for Pterodactyl\r\n\r\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
-    "features": null,
+    "features": [],
     "docker_images": {
+        "Python 3.13": "ghcr.io\/parkervcp\/yolks:python_3.13",
         "Python 3.12": "ghcr.io\/parkervcp\/yolks:python_3.12",
         "Python 3.11": "ghcr.io\/parkervcp\/yolks:python_3.11",
         "Python 3.10": "ghcr.io\/parkervcp\/yolks:python_3.10",
@@ -30,7 +31,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# Python App Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\n## add git ending if it's not on the address\r\nif [[ ${GIT_ADDRESS} != *.git ]]; then\r\n    GIT_ADDRESS=${GIT_ADDRESS}.git\r\nfi\r\n\r\nif [ -z \"${USERNAME}\" ] && [ -z \"${ACCESS_TOKEN}\" ]; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    GIT_ADDRESS=\"https:\/\/${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d\/ -f3-)\"\r\nfi\r\n\r\n## pull git python repo\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    else\r\n        echo -e \"cloning ${BRANCH}'\"\r\n        git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .\r\n    fi\r\n\r\nfi\r\n\r\nexport HOME=\/mnt\/server\r\n\r\necho \"Installing python requirements into folder\"\r\nif [[ ! -z ${PY_PACKAGES} ]]; then\r\n    pip install -U --prefix .local ${PY_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/requirements.txt ]; then\r\n    pip install -U --prefix .local -r ${REQUIREMENTS_FILE}\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
-            "container": "python:3.8-slim-bookworm",
+            "container": "python:3.12-slim-bookworm",
             "entrypoint": "bash"
         }
     },
@@ -42,9 +43,11 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 1
         },
         {
             "name": "Git Branch",
@@ -53,9 +56,11 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 2
         },
         {
             "name": "User Uploaded Files",
@@ -64,9 +69,11 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 3
         },
         {
             "name": "Auto Update",
@@ -75,9 +82,11 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 4
         },
         {
             "name": "App py file",
@@ -86,9 +95,11 @@
             "default_value": "app.py",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "required",
+                "string"
+            ],
+            "sort": 5
         },
         {
             "name": "Additional Python packages",
@@ -97,9 +108,11 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 6
         },
         {
             "name": "Git Username",
@@ -108,9 +121,11 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 7
         },
         {
             "name": "Git Access Token",
@@ -119,9 +134,11 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 8
         },
         {
             "name": "Requirements file",
@@ -130,9 +147,11 @@
             "default_value": "requirements.txt",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "required",
+                "string"
+            ],
+            "sort": 9
         }
     ]
 }
