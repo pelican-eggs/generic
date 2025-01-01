@@ -11,13 +11,13 @@
     "description": "An Egg for running TypeScript projects. It compiles TypeScript to JavaScript and runs the generated code using Node.js.",
     "features": [],
     "docker_images": {
-        "Nodejs 21": "ghcr.io\/parkervcp\/yolks:nodejs_21",
-        "Nodejs 20": "ghcr.io\/parkervcp\/yolks:nodejs_20",
-        "Nodejs 19": "ghcr.io\/parkervcp\/yolks:nodejs_19",
-        "Nodejs 18": "ghcr.io\/parkervcp\/yolks:nodejs_18",
-        "Nodejs 17": "ghcr.io\/parkervcp\/yolks:nodejs_17",
-        "Nodejs 16": "ghcr.io\/parkervcp\/yolks:nodejs_16",
-        "Nodejs 14": "ghcr.io\/parkervcp\/yolks:nodejs_14"
+        "Nodejs 21": "ghcr.io/parkervcp/yolks:nodejs_21",
+        "Nodejs 20": "ghcr.io/parkervcp/yolks:nodejs_20",
+        "Nodejs 19": "ghcr.io/parkervcp/yolks:nodejs_19",
+        "Nodejs 18": "ghcr.io/parkervcp/yolks:nodejs_18",
+        "Nodejs 17": "ghcr.io/parkervcp/yolks:nodejs_17",
+        "Nodejs 16": "ghcr.io/parkervcp/yolks:nodejs_16",
+        "Nodejs 14": "ghcr.io/parkervcp/yolks:nodejs_14"
     },
     "file_denylist": [],
     "startup": "if [ ! -z \"$ADDITIONAL_PACKAGES\" ]; then npm install $ADDITIONAL_PACKAGES; fi; if [ ! -z \"$UNINSTALL_PACKAGES\" ]; then npm uninstall $UNINSTALL_PACKAGES; fi; tsc; if [ ! -z \"$MAIN_FILE\" ]; then node $MAIN_FILE; fi",
@@ -29,8 +29,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# TypeScript Project Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n# Systemabh\u00e4ngige Pakete installieren\r\napt update\r\napt install -y curl jq file unzip make gcc g++ python3 python3-dev python3-pip libtool\r\n\r\necho -e \"Updating npm, please wait...\"\r\nnpm install npm@latest --location=global\r\n\r\n# Setze das Arbeitsverzeichnis\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# \u00dcberpr\u00fcfe, ob der User bereits Daten hochgeladen hat\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"Assuming user knows what they are doing. Have a good day.\"\r\n    exit 0\r\nfi\r\n\r\n# Erstelle die TypeScript-Projektstruktur\r\necho -e \"Setting up TypeScript project...\"\r\n\r\n# Erstelle eine tsconfig.json\r\ncat <<EOT > tsconfig.json\r\n{\r\n  \"compilerOptions\": {\r\n    \"target\": \"es6\",\r\n    \"module\": \"commonjs\",\r\n    \"outDir\": \".\/dist\",\r\n    \"rootDir\": \".\/src\",\r\n    \"strict\": true,\r\n    \"esModuleInterop\": true,\r\n    \"skipLibCheck\": true\r\n  },\r\n  \"include\": [\"src\/**\/*\"],\r\n  \"exclude\": [\"node_modules\", \"dist\"]\r\n}\r\nEOT\r\n\r\n# Erstelle src-Ordner, falls er noch nicht existiert\r\nif [ ! -d \"src\" ]; then\r\n    echo -e \"Creating src folder...\"\r\n    mkdir src\r\n    echo -e \"console.log('Hello, World!');\" > src\/index.ts\r\nfi\r\n\r\n# Installiere TypeScript und ben\u00f6tigte Typdefinitionen\r\necho -e \"Installing TypeScript and @types\/node...\"\r\nnpm install typescript @types\/node --save-dev\r\n\r\n# Zus\u00e4tzliche Pakete installieren, falls angegeben\r\nif [ ! -z \"$ADDITIONAL_PACKAGES\" ]; then\r\n    echo -e \"Installing additional packages: $ADDITIONAL_PACKAGES\"\r\n    npm install $ADDITIONAL_PACKAGES\r\nfi\r\n\r\n# Nicht ben\u00f6tigte Pakete entfernen, falls angegeben\r\nif [ ! -z \"$UNINSTALL_PACKAGES\" ]; then\r\n    echo -e \"Uninstalling packages: $UNINSTALL_PACKAGES\"\r\n    npm uninstall $UNINSTALL_PACKAGES\r\nfi\r\n\r\n# Installiere Abh\u00e4ngigkeiten aus package.json, falls vorhanden\r\nif [ -f package.json ]; then\r\n    echo -e \"Installing dependencies from package.json...\"\r\n    npm install\r\nelse\r\n    # Erstelle eine package.json, wenn noch keine existiert\r\n    echo -e \"No package.json found. Creating package.json...\"\r\n    npm init -y\r\n    npm install typescript @types\/node\r\nfi\r\n\r\n# Kompiliere TypeScript-Dateien\r\necho -e \"Compiling TypeScript files...\"\r\ntsc\r\n\r\necho -e \"TypeScript project setup completed!\"\r\nexit 0",
-            "container": "ghcr.io\/pelican-eggs\/installers:debian",
+            "script": "#!/bin/bash\r\n# TypeScript Project Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\n# Install system dependencies\r\napt update\r\napt install -y curl jq file unzip make gcc g++ python3 python3-dev python3-pip libtool\r\n\r\necho -e \"Updating npm, please wait...\"\r\nnpm install npm@latest --location=global\r\n\r\n# Set the working directory\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\n# Check if the user has already uploaded files\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"Assuming user knows what they are doing. Have a good day.\"\r\n    exit 0\r\nfi\r\n\r\n# Create TypeScript project structure\r\necho -e \"Setting up TypeScript project...\"\r\n\r\n# Create a tsconfig.json\r\ncat <<EOT > tsconfig.json\r\n{\r\n  \"compilerOptions\": {\r\n    \"target\": \"es6\",\r\n    \"module\": \"commonjs\",\r\n    \"outDir\": \"./dist\",\r\n    \"rootDir\": \"./src\",\r\n    \"strict\": true,\r\n    \"esModuleInterop\": true,\r\n    \"skipLibCheck\": true\r\n  },\r\n  \"include\": [\"src/**/*\"],\r\n  \"exclude\": [\"node_modules\", \"dist\"]\r\n}\r\nEOT\r\n\r\n# Create src folder if it does not exist\r\nif [ ! -d \"src\" ]; then\r\n    echo -e \"Creating src folder...\"\r\n    mkdir src\r\n    echo -e \"console.log('Hello, World!');\" > src/index.ts\r\nfi\r\n\r\n# Install TypeScript and required type definitions\r\necho -e \"Installing TypeScript and @types/node...\"\r\nnpm install typescript @types/node --save-dev\r\n\r\n# Install additional packages if specified\r\nif [ ! -z \"$ADDITIONAL_PACKAGES\" ]; then\r\n    echo -e \"Installing additional packages: $ADDITIONAL_PACKAGES\"\r\n    npm install $ADDITIONAL_PACKAGES\r\nfi\r\n\r\n# Uninstall specified packages if provided\r\nif [ ! -z \"$UNINSTALL_PACKAGES\" ]; then\r\n    echo -e \"Uninstalling packages: $UNINSTALL_PACKAGES\"\r\n    npm uninstall $UNINSTALL_PACKAGES\r\nfi\r\n\r\n# Install dependencies from package.json if present\r\nif [ -f package.json ]; then\r\n    echo -e \"Installing dependencies from package.json...\"\r\n    npm install\r\nelse\r\n    # Create a package.json if none exists\r\n    echo -e \"No package.json found. Creating package.json...\"\r\n    npm init -y\r\n    npm install typescript @types/node\r\nfi\r\n\r\n# Compile TypeScript files\r\necho -e \"Compiling TypeScript files...\"\r\ntsc\r\n\r\necho -e \"TypeScript project setup completed!\"\r\nexit 0",
+            "container": "ghcr.io/pelican-eggs/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -53,7 +53,7 @@
             "name": "Main File",
             "description": "",
             "env_variable": "MAIN_FILE",
-            "default_value": "src\/index.ts",
+            "default_value": "src/index.ts",
             "user_viewable": true,
             "user_editable": true,
             "rules": [
