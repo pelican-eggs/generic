@@ -40,6 +40,10 @@ A generic Lua (Luvit) language egg
 [nodejs](https://nodejs.org)
 A generic Node.JS egg
 
+### [NPM JSON](npmjson)
+
+A generic NPM JSON (Run package) egg
+
 ### [Bun](bun)
 
 [bun](https://bun.sh)
