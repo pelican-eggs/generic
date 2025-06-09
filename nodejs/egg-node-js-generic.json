@@ -1,26 +1,28 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
-        "version": "PTDL_v2",
+        "version": "PLCN_v1",
         "update_url": null
     },
-    "exported_at": "2024-06-02T14:43:51+00:00",
+    "exported_at": "2025-05-24T14:27:20+00:00",
     "name": "node.js generic",
     "author": "parker@parkervcp.com",
     "uuid": "fe73af9d-0d33-42f4-9572-fad52eb802f0",
     "description": "a generic node.js egg\r\n\r\nThis will clone a git repo. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
+    "tags": [],
     "features": null,
     "docker_images": {
-        "Nodejs 23": "ghcr.io\/parkervcp\/yolks:nodejs_23",
-        "Nodejs 22": "ghcr.io\/parkervcp\/yolks:nodejs_22",
-        "Nodejs 21": "ghcr.io\/parkervcp\/yolks:nodejs_21",
-        "Nodejs 20": "ghcr.io\/parkervcp\/yolks:nodejs_20",
-        "Nodejs 19": "ghcr.io\/parkervcp\/yolks:nodejs_19",
-        "Nodejs 18": "ghcr.io\/parkervcp\/yolks:nodejs_18",
-        "Nodejs 17": "ghcr.io\/parkervcp\/yolks:nodejs_17",
-        "Nodejs 16": "ghcr.io\/parkervcp\/yolks:nodejs_16",
-        "Nodejs 14": "ghcr.io\/parkervcp\/yolks:nodejs_14",
-        "Nodejs 12": "ghcr.io\/parkervcp\/yolks:nodejs_12"
+        "Nodejs 24": "ghcr.io\/pelican-eggs\/yolks:nodejs_24",
+        "Nodejs 23": "ghcr.io\/pelican-eggs\/yolks:nodejs_23",
+        "Nodejs 22": "ghcr.io\/pelican-eggs\/yolks:nodejs_22",
+        "Nodejs 21": "ghcr.io\/pelican-eggs\/yolks:nodejs_21",
+        "Nodejs 20": "ghcr.io\/pelican-eggs\/yolks:nodejs_20",
+        "Nodejs 19": "ghcr.io\/pelican-eggs\/yolks:nodejs_19",
+        "Nodejs 18": "ghcr.io\/pelican-eggs\/yolks:nodejs_18",
+        "Nodejs 17": "ghcr.io\/pelican-eggs\/yolks:nodejs_17",
+        "Nodejs 16": "ghcr.io\/pelican-eggs\/yolks:nodejs_16",
+        "Nodejs 14": "ghcr.io\/pelican-eggs\/yolks:nodejs_14",
+        "Nodejs 12": "ghcr.io\/pelican-eggs\/yolks:nodejs_12"
     },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm install ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then \/usr\/local\/bin\/npm install; fi; if [[ \"${MAIN_FILE}\" == \"*.js\" ]]; then \/usr\/local\/bin\/node \"\/home\/container\/${MAIN_FILE}\" ${NODE_ARGS}; else \/usr\/local\/bin\/ts-node --esm \"\/home\/container\/${MAIN_FILE}\" ${NODE_ARGS}; fi",
@@ -39,48 +41,18 @@
     },
     "variables": [
         {
-            "name": "Git Repo Address",
-            "description": "GitHub Repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
-            "env_variable": "GIT_ADDRESS",
+            "name": "Additional Arguments.",
+            "description": "Any extra arguments for nodejs or ts-node",
+            "env_variable": "NODE_ARGS",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
-        },
-        {
-            "name": "Install Branch",
-            "description": "The branch to install.",
-            "env_variable": "BRANCH",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
-        },
-        {
-            "name": "User Uploaded Files",
-            "description": "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true",
-            "env_variable": "USER_UPLOAD",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
-            "sort": null,
-            "field_type": "text"
-        },
-        {
-            "name": "Auto Update",
-            "description": "Pull the latest files on startup when using a GitHub repo.",
-            "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string",
+                "max:64"
+            ],
+            "sort": null
         },
         {
             "name": "Additional Node packages",
@@ -89,20 +61,24 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": null
         },
         {
-            "name": "Git Username",
-            "description": "Username to auth with git.",
-            "env_variable": "USERNAME",
-            "default_value": "",
+            "name": "Auto Update",
+            "description": "Pull the latest files on startup when using a GitHub repo.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": null
         },
         {
             "name": "Git Access Token",
@@ -111,20 +87,50 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": null
         },
         {
-            "name": "Uninstall Node packages",
-            "description": "Uninstall node packages.\r\n\r\nUse spaces to separate.",
-            "env_variable": "UNNODE_PACKAGES",
+            "name": "Git Repo Address",
+            "description": "GitHub Repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
+            "env_variable": "GIT_ADDRESS",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": null
+        },
+        {
+            "name": "Git Username",
+            "description": "Username to auth with git.",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": null
+        },
+        {
+            "name": "Install Branch",
+            "description": "The branch to install.",
+            "env_variable": "BRANCH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": null
         },
         {
             "name": "Main file",
@@ -133,20 +139,38 @@
             "default_value": "index.js",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:16",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "required",
+                "string",
+                "max:16"
+            ],
+            "sort": null
         },
         {
-            "name": "Additional Arguments.",
-            "description": "Any extra arguments for nodejs or ts-node",
-            "env_variable": "NODE_ARGS",
+            "name": "Uninstall Node packages",
+            "description": "Uninstall node packages.\r\n\r\nUse spaces to separate.",
+            "env_variable": "UNNODE_PACKAGES",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:64",
-            "sort": null,
-            "field_type": "text"
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": null
+        },
+        {
+            "name": "User Uploaded Files",
+            "description": "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": null
         }
     ]
 }
