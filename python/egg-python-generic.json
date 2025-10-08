@@ -4,13 +4,14 @@
         "version": "PLCN_v1",
         "update_url": null
     },
-    "exported_at": "2024-12-28T09:14:31+00:00",
+    "exported_at": "2025-10-08T07:36:57+00:00",
     "name": "python generic",
     "author": "parker@parkervcp.com",
     "uuid": "cbd15054-262b-4183-82e9-462c3894175b",
     "description": "A Generic Python Egg for Pterodactyl\r\n\r\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
     "features": [],
     "docker_images": {
+        "Python 3.14": "ghcr.io\/parkervcp\/yolks:python_3.14",
         "Python 3.13": "ghcr.io\/parkervcp\/yolks:python_3.13",
         "Python 3.12": "ghcr.io\/parkervcp\/yolks:python_3.12",
         "Python 3.11": "ghcr.io\/parkervcp\/yolks:python_3.11",
