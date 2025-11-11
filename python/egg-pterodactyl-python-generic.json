@@ -4,11 +4,11 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-10-08T07:36:57+00:00",
+    "exported_at": "2025-11-11T09:56:17+00:00",
     "name": "python generic",
     "author": "parker@parkervcp.com",
-    "description": "A Generic Python Egg for Pterodactyl\r\n\r\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
-    "features": [],
+    "description": "A Generic Python Egg for Pelican & Pterodactyl\n\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
+    "features": null,
     "docker_images": {
         "Python 3.14": "ghcr.io\/parkervcp\/yolks:python_3.14",
         "Python 3.13": "ghcr.io\/parkervcp\/yolks:python_3.13",
@@ -24,7 +24,7 @@
     "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ ! -z \"{{PY_PACKAGES}}\" ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f \/home\/container\/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; \/usr\/local\/bin\/python \/home\/container\/{{PY_FILE}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
+        "startup": "{\n    \"done\": [\n        \"change this text 1\",\n        \"change this text 2\"\n    ]\n}",
         "logs": "{}",
         "stop": "^C"
     },
@@ -37,9 +37,39 @@
     },
     "variables": [
         {
-            "name": "Git Repo Address",
-            "description": "Git repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
-            "env_variable": "GIT_ADDRESS",
+            "name": "Additional Python packages",
+            "description": "Install additional python packages.\r\n\r\nUse spaces to separate",
+            "env_variable": "PY_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "App py file",
+            "description": "The file that starts the App.",
+            "env_variable": "PY_FILE",
+            "default_value": "app.py",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Pull the latest files on startup when using a GitHub repo.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Access Token",
+            "description": "Password to use with git.\r\n\r\nIt's best practice to use a Personal Access Token.\r\nhttps:\/\/github.com\/settings\/tokens\r\nhttps:\/\/gitlab.com\/-\/profile\/personal_access_tokens",
+            "env_variable": "ACCESS_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -57,39 +87,9 @@
             "field_type": "text"
         },
         {
-            "name": "User Uploaded Files",
-            "description": "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true",
-            "env_variable": "USER_UPLOAD",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "Auto Update",
-            "description": "Pull the latest files on startup when using a GitHub repo.",
-            "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "App py file",
-            "description": "The file that starts the App.",
-            "env_variable": "PY_FILE",
-            "default_value": "app.py",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Additional Python packages",
-            "description": "Install additional python packages.\r\n\r\nUse spaces to separate",
-            "env_variable": "PY_PACKAGES",
+            "name": "Git Repo Address",
+            "description": "Git repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
+            "env_variable": "GIT_ADDRESS",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -107,16 +107,6 @@
             "field_type": "text"
         },
         {
-            "name": "Git Access Token",
-            "description": "Password to use with git.\r\n\r\nIt's best practice to use a Personal Access Token.\r\nhttps:\/\/github.com\/settings\/tokens\r\nhttps:\/\/gitlab.com\/-\/profile\/personal_access_tokens",
-            "env_variable": "ACCESS_TOKEN",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
             "name": "Requirements file",
             "description": "if there are other requirements files to choose from.",
             "env_variable": "REQUIREMENTS_FILE",
@@ -124,6 +114,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "User Uploaded Files",
+            "description": "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]

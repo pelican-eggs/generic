@@ -1,14 +1,15 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
-        "version": "PLCN_v2",
-        "update_url": null
+        "version": "PLCN_v3",
+        "update_url": "https://raw.githubusercontent.com/pelican-eggs/generic/refs/heads/main/python/egg-python-generic.json"
     },
-    "exported_at": "2025-10-08T13:33:01+00:00",
+    "exported_at": "2025-11-11T09:56:17+00:00",
     "name": "python generic",
     "author": "parker@parkervcp.com",
     "uuid": "cbd15054-262b-4183-82e9-462c3894175b",
-    "description": "A Generic Python Egg for Pterodactyl\r\n\r\nTested with: https://github.com/Ispira/pixel-bot",
+    "description": "A Generic Python Egg for Pelican & Pterodactyl\n\nTested with: https://github.com/Ispira/pixel-bot",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAHFUExURQAAAE6NwEqGujxxnjdolgAAAAAAAAAAAAAAAAAAAE6PxEyKv0iFtkN9rT10oTlsljZmkAAAAAAAAFKRxv3dSvnVPgAAADJghwAAAP3VNgAAADVokgAAAOzORQAAADZpkxsxRQAAAAAAAOLDRf3ZQQAAAEaBsjZnkQAAAPLhbv3pav3LG0N9rhwyS/Xjb/PBGkB1oz1zogAAAMKaEgAAAAAAAAAAAAAAAAAAAOjHPevFNOvCKuu+Ieu7GMabEgAAAAAAAAAAAAAAAAAAAAAAAAAAAP3eTgAAAAAAAAAAAAAAAPHQP/rTOf3SL/rHGcCXEgAAAAAAAAAAAAAAAAAAAAAAAEiDtER+rUB4p0yKvP///0V/r0F5qD50ojpvmzZplEmFt0aAsUJ7qj51oztwnTdqljhsl0+NwUuIu0R9rUB4pj1zoDltmf/iVVCPw0yJvEiEtT10of/eS//aQU2LvkaAsDtwnP/aQv/WN//TLUqHuUeBskN8qz92pf/XOP/PI//mYf/jV//fTf/bQv/TLv/PJP/rbP/nYf/bQ//XOf/MHDpwnP/nYv/jWP/fTv/TL//bRP/XOv/TMP/QJf/YOv/UMP/QJpJJAAIAAABWdFJOUwCv7feSCwMoQRV+oKGjp6qqSBi994IKtkPtJPdPiD22XExHa/dG96pOpvf311uzwm/3S3o0CCE8NaqpqampeSACCRMSLB73QBwFAUzM99h7Ox1CRTgf+DIQcQAAAAFiS0dEWgO7paIAAAAHdElNRQfpCwsJNDG4a564AAAA9UlEQVQY02NgAAJGprDwCGYWVjYGKIiMio6JjYtnZ4UJJCQmJaekxnNwgnlc3Dy8fPwCafHxgkIgvnB6RlhmVnZOPFAgV0RUjCEvvyA6pjAOyBeXKCqWlGIoSShNSi5LjZcWl5Etr6iUY6iqrqmVV1AUVOJQVqmrrFdlUMvMUtfQ1GpobGqua2nVVmLQiSnU1Wtrb2zq6Gxp7dLnYDAw7DZq6+nt6+jsb+3qMjZhMDUztwDyLa2sbWxt7TjsGRwcnZx7+yZMnDS5i8PCxRXiercJU6ZOi9J293D09AILePv4Tuvy8w9whnnONNAiSCk4JNQUyAYAQGJCf8gtm+UAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMTEtMTFUMDk6NTI6NDkrMDA6MDA/u01AAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTExLTExVDA5OjUyOjQ5KzAwOjAwTub1/AAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0xMS0xMVQwOTo1Mjo0OSswMDowMBnz1CMAAAAASUVORK5CYII=",
     "tags": [],
     "features": [],
     "docker_images": {
@@ -23,10 +24,12 @@
         "Python 2.7": "ghcr.io/parkervcp/yolks:python_2.7"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ ! -z \"{{PY_PACKAGES}}\" ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f /home/container/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; /usr/local/bin/python /home/container/{{PY_FILE}}",
+    "startup_commands": {
+        "Default": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ ! -z \"{{PY_PACKAGES}}\" ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f /home/container/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; /usr/local/bin/python /home/container/{{PY_FILE}}"
+    },
     "config": {
         "files": "{}",
-        "startup": "{\n    \"done\": \"change this part\"\n}",
+        "startup": "{\n    \"done\": [\n        \"change this text 1\",\n        \"change this text 2\"\n    ]\n}",
         "logs": "{}",
         "stop": "^C"
     },
