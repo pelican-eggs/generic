@@ -1,0 +1,207 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/generic/refs/heads/main/bun/egg-bun.yaml'
+exported_at: '2026-01-01T21:40:06+00:00'
+name: Bun
+author: mratox@protonmail.com
+uuid: b62c6de5-7034-4853-970f-ed5b57c5083b
+description: |-
+  Bun is an incredibly fast JavaScript runtime, transpiler bundler, and npm package manager
+  all-in-one.
+image: 'data:image/png;base64,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'
+tags: {  }
+features: {  }
+docker_images:
+  'Bun Latest': 'ghcr.io/pelican-eggs/yolks:bun_latest'
+  'Bun Canary': 'ghcr.io/pelican-eggs/yolks:bun_canary'
+file_denylist: {  }
+startup_commands:
+  Default: 'if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if [[ ! -z ${BUN_PACKAGES} ]]; then bun install ${BUN_PACKAGES}; fi; if [[ ! -z ${RMBUN_PACKAGES} ]]; then bun remove ${RMBUN_PACKAGES}; fi; if [ -f /home/container/package.json ]; then bun install; fi; bun run {{MAIN_FILE}}'
+config:
+  files: {  }
+  startup:
+    done:
+      - 'change this text 1'
+      - 'change this text 2'
+  logs: {  }
+  stop: ^^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      # Bun App Installation Script
+      #
+      # Server Files: /mnt/server
+      apt update
+      apt install -y file ake gcc g++ python python-dev libtool
+      mkdir -p /mnt/server
+      cd /mnt/server
+
+
+      mkdir -p /mnt/server
+      cd /mnt/server
+
+      if [ "${USER_UPLOAD}" == "true" ] || [ "${USER_UPLOAD}" == "1" ]; then
+          echo -e "assuming user knows what they are doing have a good day."
+          exit 0
+      fi
+
+      ## add git ending if it's not on the address
+      if [[ ${GIT_ADDRESS} != *.git ]]; then
+          GIT_ADDRESS=${GIT_ADDRESS}.git
+      fi
+
+      if [ -z "${USERNAME}" ] && [ -z "${ACCESS_TOKEN}" ]; then
+          echo -e "using anon api call"
+      else
+          GIT_ADDRESS="https://${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)"
+      fi
+
+      ## pull git js bot repo
+      if [ "$(ls -A /mnt/server)" ]; then
+          echo -e "/mnt/server directory is not empty."
+          if [ -d .git ]; then
+              echo -e ".git directory exists"
+              if [ -f .git/config ]; then
+                  echo -e "loading info from git config"
+                  ORIGIN=$(git config --get remote.origin.url)
+              else
+                  echo -e "files found with no git config"
+                  echo -e "closing out without touching things to not break anything"
+                  exit 10
+              fi
+          fi
+
+          if [ "${ORIGIN}" == "${GIT_ADDRESS}" ]; then
+              echo "pulling latest from github"
+              git pull
+          fi
+      else
+          echo -e "/mnt/server is empty.
+      cloning files into repo"
+          if [ -z ${BRANCH} ]; then
+              echo -e "cloning default branch"
+              git clone ${GIT_ADDRESS} .
+          else
+              echo -e "cloning ${BRANCH}'"
+              git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .
+          fi
+      fi
+
+
+      echo "Installing bun packages"
+      if [[ ! -z ${BUN_PACKAGES} ]]; then
+          bun install ${BUN_PACKAGES}
+      fi
+
+      if [ -f /mnt/server/package.json ]; then
+          bun install --production
+      fi
+
+      ## install end
+      echo "-----------------------------------------"
+      echo "Installation completed..."
+      echo "-----------------------------------------"
+    container: 'ghcr.io/pelican-eggs/installers:debian'
+    entrypoint: bash
+variables:
+  -
+    sort: 9
+    name: 'Git Access Token'
+    description: 'Git access token for authentication.'
+    env_variable: ACCESS_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 3
+    name: 'Auto Update'
+    description: "Pull the latest files on startup when using a Git Repository.\r\n0 = false (default)\r\n1 = true"
+    env_variable: AUTO_UPDATE
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 7
+    name: 'Git Branch'
+    description: 'The Git branch to install.'
+    env_variable: BRANCH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 5
+    name: 'Additional Bun Packages'
+    description: "Install additional bun packages.\r\nUse spaces to separate"
+    env_variable: BUN_PACKAGES
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 1
+    name: 'Git Repository Address'
+    description: 'The Git repository address to clone .'
+    env_variable: GIT_ADDRESS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 4
+    name: 'Main file'
+    description: 'The main file passed to the bun run command'
+    env_variable: MAIN_FILE
+    default_value: index.js
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+  -
+    sort: 6
+    name: 'Uninstall Bun Packages'
+    description: "Uninstall bun packages.\r\nUse spaces to separate"
+    env_variable: RMBUN_PACKAGES
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 2
+    name: 'User Uploaded Files'
+    description: "Skip all the install stuff if you are letting a user upload files.\r\n0 = false (default)\r\n1 = true"
+    env_variable: USER_UPLOAD
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 8
+    name: 'Git Username'
+    description: 'Git username for authentication.'
+    env_variable: USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
