@@ -1,0 +1,47 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-01-01T21:42:37+00:00",
+    "name": "Java generic",
+    "author": "sneaky@sneakyhub.com",
+    "description": "Creates a container that runs java.",
+    "features": null,
+    "docker_images": {
+        "Java 8": "ghcr.io\/pelican-eggs\/yolks:java_8",
+        "Java 11": "ghcr.io\/pelican-eggs\/yolks:java_11",
+        "Java 16": "ghcr.io\/pelican-eggsyolks:java_16",
+        "Java 17": "ghcr.io\/pelican-eggs\/yolks:java_17",
+        "Java 19": "ghcr.io\/pelican-eggs\/yolks:java_19",
+        "Java 21": "ghcr.io\/pelican-eggs\/yolks:java_21"
+    },
+    "file_denylist": [],
+    "startup": "java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}",
+    "config": {
+        "files": "[]",
+        "startup": "{\n    \"done\": \"change this text\"\n}",
+        "logs": "[]",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\n# Java Installation Script\n#\n# Server Files: \/mnt\/server\nPROJECT=java\n\ncd \/mnt\/server",
+            "container": "ghcr.io\/pelican-eggs\/yolks:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "JAR FILE",
+            "description": "",
+            "env_variable": "JARFILE",
+            "default_value": "sneakyhub.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        }
+    ]
+}
