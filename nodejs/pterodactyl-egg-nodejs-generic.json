@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2026-07-16T17:36:48+00:00",
+    "exported_at": "2026-07-16T17:45:32+00:00",
     "name": "node.js generic",
     "author": "parker@parkervcp.com",
     "description": "a generic node.js egg This will clone a git repo. it defaults to master if no branch is specified. Installs the node_modules on install. If you set user_upload then I assume you know what you are doing.",
@@ -39,7 +39,7 @@
             "default_value": "index.js",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:16",
+            "rules": "required|string|max:20",
             "field_type": "text"
         },
         {
@@ -124,7 +124,7 @@
         },
         {
             "name": "Additional Arguments.",
-            "description": "Any extra arguments for nodejs or ts-node",
+            "description": "Any extra arguments for nodejs or tsx",
             "env_variable": "NODE_ARGS",
             "default_value": "",
             "user_viewable": true,

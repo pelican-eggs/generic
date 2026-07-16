@@ -2,7 +2,7 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: 'https://raw.githubusercontent.com/pelican-eggs/generic/refs/heads/main/nodejs/egg-nodejs-generic.yaml'
-exported_at: '2026-07-16T17:36:48+00:00'
+exported_at: '2026-07-16T17:45:32+00:00'
 name: 'node.js generic'
 author: parker@parkervcp.com
 uuid: fe73af9d-0d33-42f4-9572-fad52eb802f0
@@ -159,11 +159,11 @@ variables:
     rules:
       - required
       - string
-      - 'max:16'
+      - 'max:20'
   -
     sort: 10
     name: 'Additional Arguments.'
-    description: 'Any extra arguments for nodejs or ts-node'
+    description: 'Any extra arguments for nodejs or tsx'
     env_variable: NODE_ARGS
     default_value: ''
     user_viewable: true
