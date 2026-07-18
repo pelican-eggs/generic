@@ -1,8 +1,8 @@
 _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
-  update_url: 'https://raw.githubusercontent.com/pelican-eggs/generic/refs/heads/main/nodejs/egg-nodejs-generic.yaml'
-exported_at: '2026-07-16T17:45:32+00:00'
+  update_url: null
+exported_at: '2026-07-18T19:41:09+00:00'
 name: 'node.js generic'
 author: parker@parkervcp.com
 uuid: fe73af9d-0d33-42f4-9572-fad52eb802f0
@@ -18,7 +18,7 @@ docker_images:
   'Nodejs 22': 'ghcr.io/pelican-eggs/yolks:nodejs_22'
 file_denylist: {  }
 startup_commands:
-  Default: 'if [[ -d .git ]] && [[ 0 == "1" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then /usr/local/bin/npm install ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then /usr/local/bin/npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f /home/container/package.json ]; then /usr/local/bin/npm install; fi; if [[ "${MAIN_FILE}" == *.js ]]; then /usr/local/bin/node "/home/container/${MAIN_FILE}" ${NODE_ARGS}; else /usr/local/bin/tsx "/home/container/${MAIN_FILE}" ${NODE_ARGS}; fi'
+  Default: 'if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then /usr/local/bin/npm install ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then /usr/local/bin/npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f /home/container/package.json ]; then /usr/local/bin/npm install; fi; if [[ "${MAIN_FILE}" == "*.js" ]]; then /usr/local/bin/node "/home/container/${MAIN_FILE}" ${NODE_ARGS}; else /usr/local/bin/tsx "/home/container/${MAIN_FILE}" ${NODE_ARGS}; fi'
 config:
   files: {  }
   startup:
@@ -105,7 +105,6 @@ scripts:
     entrypoint: bash
 variables:
   -
-    sort: 6
     name: 'Git Access Token'
     description: "Password to use with git.\r\n\r\nIt's best practice to use a Personal Access Token.\r\nhttps://github.com/settings/tokens\r\nhttps://gitlab.com/-/profile/personal_access_tokens"
     env_variable: ACCESS_TOKEN
@@ -115,8 +114,8 @@ variables:
     rules:
       - nullable
       - string
+    sort: 6
   -
-    sort: 2
     name: 'Auto Update'
     description: 'Pull the latest files on startup when using a GitHub repo.'
     env_variable: AUTO_UPDATE
@@ -126,8 +125,8 @@ variables:
     rules:
       - required
       - boolean
+    sort: 2
   -
-    sort: 4
     name: 'Install Branch'
     description: 'The branch to install.'
     env_variable: BRANCH
@@ -137,8 +136,8 @@ variables:
     rules:
       - nullable
       - string
+    sort: 4
   -
-    sort: 3
     name: 'Git Repo Address'
     description: "GitHub Repo to clone\r\n\r\nI.E. https://github.com/parkervcp/repo_name"
     env_variable: GIT_ADDRESS
@@ -148,8 +147,8 @@ variables:
     rules:
       - nullable
       - string
+    sort: 3
   -
-    sort: 1
     name: 'Main file'
     description: "The file that starts the app.\r\nCan be .js and .ts"
     env_variable: MAIN_FILE
@@ -159,9 +158,9 @@ variables:
     rules:
       - required
       - string
-      - 'max:20'
+      - 'max:16'
+    sort: 1
   -
-    sort: 10
     name: 'Additional Arguments.'
     description: 'Any extra arguments for nodejs or tsx'
     env_variable: NODE_ARGS
@@ -172,8 +171,8 @@ variables:
       - nullable
       - string
       - 'max:64'
+    sort: 10
   -
-    sort: 8
     name: 'Additional Node packages'
     description: "Install additional node packages.\r\n\r\nUse spaces to separate."
     env_variable: NODE_PACKAGES
@@ -183,8 +182,8 @@ variables:
     rules:
       - nullable
       - string
+    sort: 8
   -
-    sort: 9
     name: 'Uninstall Node packages'
     description: "Uninstall node packages.\r\n\r\nUse spaces to separate."
     env_variable: UNNODE_PACKAGES
@@ -194,8 +193,8 @@ variables:
     rules:
       - nullable
       - string
+    sort: 9
   -
-    sort: 7
     name: 'User Uploaded Files'
     description: "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true"
     env_variable: USER_UPLOAD
@@ -205,8 +204,8 @@ variables:
     rules:
       - required
       - boolean
+    sort: 7
   -
-    sort: 5
     name: 'Git Username'
     description: 'Username to auth with git.'
     env_variable: USERNAME
@@ -216,3 +215,4 @@ variables:
     rules:
       - nullable
       - string
+    sort: 5
