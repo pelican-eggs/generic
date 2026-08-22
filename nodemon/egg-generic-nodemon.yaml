@@ -2,46 +2,44 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: null
-exported_at: '2025-06-09T14:03:05+02:00'
-name: Generic Nodemon
+exported_at: '2026-08-22T09:27:30+00:00'
+name: 'Generic Nodemon'
 author: nick@blackforthosting.com
 uuid: c145da9a-f00a-440c-a7b3-d840ff4081ef
 description: |-
-  Nodemon javascript egg that automatically restarts the node application when file changes in the directory are detected
+  Nodemon javascript egg that automatically restarts the node application when file changes in the
+  directory are detected
 
   This will clone a git repo for a bot. it defaults to master if no branch is specified.
 
-  Installs the node_modules on install. If you set user_upload, then I assume you know what you are doing.
-tags: {}
-features: {}
+  Installs the node_modules on install. If you set user_upload, then I assume you know what you are
+  doing.
+icon: null
+tags: {  }
+features: {  }
 docker_images:
-  Nodejs 26: ghcr.io/pelican-eggs/yolks:nodejs_26
-  Nodejs 25: ghcr.io/pelican-eggs/yolks:nodejs_25
-  Nodejs 24: ghcr.io/pelican-eggs/yolks:nodejs_24
-  Nodejs 23: ghcr.io/pelican-eggs/yolks:nodejs_23
-  Nodejs 22: ghcr.io/pelican-eggs/yolks:nodejs_22
-  Nodejs 21: ghcr.io/pelican-eggs/yolks:nodejs_21
-  Nodejs 20: ghcr.io/pelican-eggs/yolks:nodejs_20
-  Nodejs 19: ghcr.io/pelican-eggs/yolks:nodejs_19
-  Nodejs 18: ghcr.io/pelican-eggs/yolks:nodejs_18
-  Nodejs 17: ghcr.io/pelican-eggs/yolks:nodejs_17
-  Nodejs 16: ghcr.io/pelican-eggs/yolks:nodejs_16
-  Nodejs 14: ghcr.io/pelican-eggs/yolks:nodejs_14
-  Nodejs 12: ghcr.io/pelican-eggs/yolks:nodejs_12
-file_denylist: {}
+  'Nodejs 26': 'ghcr.io/pelican-eggs/yolks:nodejs_26'
+  'Nodejs 25': 'ghcr.io/pelican-eggs/yolks:nodejs_25'
+  'Nodejs 24': 'ghcr.io/pelican-eggs/yolks:nodejs_24'
+  'Nodejs 23': 'ghcr.io/pelican-eggs/yolks:nodejs_23'
+  'Nodejs 22': 'ghcr.io/pelican-eggs/yolks:nodejs_22'
+  'Nodejs 21': 'ghcr.io/pelican-eggs/yolks:nodejs_21'
+  'Nodejs 20': 'ghcr.io/pelican-eggs/yolks:nodejs_20'
+  'Nodejs 19': 'ghcr.io/pelican-eggs/yolks:nodejs_19'
+  'Nodejs 18': 'ghcr.io/pelican-eggs/yolks:nodejs_18'
+  'Nodejs 17': 'ghcr.io/pelican-eggs/yolks:nodejs_17'
+  'Nodejs 16': 'ghcr.io/pelican-eggs/yolks:nodejs_16'
+  'Nodejs 14': 'ghcr.io/pelican-eggs/yolks:nodejs_14'
+  'Nodejs 12': 'ghcr.io/pelican-eggs/yolks:nodejs_12'
+file_denylist: {  }
 startup_commands:
-  Default: npm install nodemon; if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]];
-    then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then /usr/local/bin/npm install
-    ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then /usr/local/bin/npm
-    uninstall ${UNNODE_PACKAGES}; fi; if [ -f /home/container/package.json ]; then
-    /usr/local/bin/npm install --production; fi; /home/container/node_modules/nodemon/bin/nodemon.js
-    /home/container/{{BOT_JS_FILE}}
+  Default: 'npm install nodemon; if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then /usr/local/bin/npm install ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then /usr/local/bin/npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f /home/container/package.json ]; then /usr/local/bin/npm install --production; fi; /home/container/node_modules/nodemon/bin/nodemon.js /home/container/{{BOT_JS_FILE}}'
 config:
-  files: {}
+  files: {  }
   startup:
     done:
-    - change this text
-  logs: {}
+      - 'change this text'
+  logs: {  }
   stop: ^C
 scripts:
   installation:
@@ -114,115 +112,125 @@ scripts:
 
       echo -e "install complete"
       exit 0
-    container: node:22-trixie-slim
+    container: 'node:22-trixie-slim'
     entrypoint: bash
 variables:
-- sort: 1
-  name: Git Repo Address
-  description: |-
-    GitHub Repo to clone
+  -
+    sort: 9
+    name: 'Git Access Token'
+    description: |-
+      Password to use with git.
 
-    I.E. https://github.com/nickdevnl/repo_name
-  env_variable: GIT_ADDRESS
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 2
-  name: Install Branch
-  description: The branch of the bot to install.
-  env_variable: BRANCH
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 3
-  name: User Uploaded Files
-  description: |-
-    Skip all the install stuff if you are letting a user upload files.
+      It's best practice to use a Personal Access Token.
+      https://github.com/settings/tokens
+      https://gitlab.com/-/profile/personal_access_tokens
+    env_variable: ACCESS_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 4
+    name: 'Auto Update'
+    description: |-
+      Pull the latest files on startup when using a GitHub repo. You must have .git folder, reinstall if
+      you are missing it.
+    env_variable: AUTO_UPDATE
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 5
+    name: 'Bot js file'
+    description: 'The file that starts the bot.'
+    env_variable: BOT_JS_FILE
+    default_value: index.js
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+  -
+    sort: 2
+    name: 'Install Branch'
+    description: 'The branch of the bot to install.'
+    env_variable: BRANCH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 1
+    name: 'Git Repo Address'
+    description: |-
+      GitHub Repo to clone
 
-    0 = false (default)
-    1 = true
-  env_variable: USER_UPLOAD
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 4
-  name: Auto Update
-  description: Pull the latest files on startup when using a GitHub repo. You must
-    have .git folder, reinstall if you are missing it.
-  env_variable: AUTO_UPDATE
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 5
-  name: Bot js file
-  description: The file that starts the bot.
-  env_variable: BOT_JS_FILE
-  default_value: index.js
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - string
-- sort: 6
-  name: Additional Node packages
-  description: |-
-    Install additional node packages.
+      I.E. https://github.com/nickdevnl/repo_name
+    env_variable: GIT_ADDRESS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 6
+    name: 'Additional Node packages'
+    description: |-
+      Install additional node packages.
 
-    Use spaces to separate.
-  env_variable: NODE_PACKAGES
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 7
-  name: Uninstall Node packages
-  description: |-
-    Uninstall node packages.
+      Use spaces to separate.
+    env_variable: NODE_PACKAGES
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 7
+    name: 'Uninstall Node packages'
+    description: |-
+      Uninstall node packages.
 
-    Use spaces to separate.
-  env_variable: UNNODE_PACKAGES
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 8
-  name: Git Username
-  description: Username to auth with git.
-  env_variable: USERNAME
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 9
-  name: Git Access Token
-  description: |-
-    Password to use with git.
+      Use spaces to separate.
+    env_variable: UNNODE_PACKAGES
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 3
+    name: 'User Uploaded Files'
+    description: |-
+      Skip all the install stuff if you are letting a user upload files.
 
-    It's best practice to use a Personal Access Token.
-    https://github.com/settings/tokens
-    https://gitlab.com/-/profile/personal_access_tokens
-  env_variable: ACCESS_TOKEN
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
+      0 = false (default)
+      1 = true
+    env_variable: USER_UPLOAD
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 8
+    name: 'Git Username'
+    description: 'Username to auth with git.'
+    env_variable: USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string

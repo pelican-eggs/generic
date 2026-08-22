@@ -2,32 +2,32 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: null
-exported_at: '2024-06-02T14:43:55+00:00'
-name: Generic Elixir
+exported_at: '2026-08-22T09:27:22+00:00'
+name: 'Generic Elixir'
 author: mravox@proton.me
 uuid: 80ba60b4-cc10-4e73-95ec-dd572e00cf6c
-description: Elixir is a functional, concurrent, high-level general-purpose programming
-  language that runs on the BEAM virtual machine, which is also used to implement
-  the Erlang programming language.
-tags: {}
-features: {}
+description: |-
+  Elixir is a functional, concurrent, high-level general-purpose programming language that runs on the
+  BEAM virtual machine, which is also used to implement the Erlang programming language.
+icon: null
+tags: {  }
+features: {  }
 docker_images:
-  Elixir Latest: ghcr.io/pelican-eggs/yolks:elixir_latest
-  Elixir 1.15: ghcr.io/pelican-eggs/yolks:elixir_1.15
-  Elixir 1.14: ghcr.io/pelican-eggs/yolks:elixir_1.14
-  Elixir 1.13: ghcr.io/pelican-eggs/yolks:elixir_1.13
-  Elixir 1.12: ghcr.io/pelican-eggs/yolks:elixir_1.12
-file_denylist: {}
+  'Elixir Latest': 'ghcr.io/pelican-eggs/yolks:elixir_latest'
+  'Elixir 1.15': 'ghcr.io/pelican-eggs/yolks:elixir_1.15'
+  'Elixir 1.14': 'ghcr.io/pelican-eggs/yolks:elixir_1.14'
+  'Elixir 1.13': 'ghcr.io/pelican-eggs/yolks:elixir_1.13'
+  'Elixir 1.12': 'ghcr.io/pelican-eggs/yolks:elixir_1.12'
+file_denylist: {  }
 startup_commands:
-  Default: if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; mix
-    deps.get; mix run --no-halt
+  Default: 'if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; mix deps.get; mix run --no-halt'
 config:
-  files: {}
+  files: {  }
   startup:
     done:
-    - change this text 1
-    - change this text 2
-  logs: {}
+      - 'change this text 1'
+      - 'change this text 2'
+  logs: {  }
   stop: ^C
 scripts:
   installation:
@@ -90,72 +90,78 @@ scripts:
       echo "-----------------------------------------"
       echo "Installation completed..."
       echo "-----------------------------------------"
-    container: ghcr.io/pelican-eggs/installers:debian
+    container: 'ghcr.io/pelican-eggs/installers:debian'
     entrypoint: bash
 variables:
-- sort: 1
-  name: Git Repository Address
-  description: The Git repository address to clone .
-  env_variable: GIT_ADDRESS
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 2
-  name: Git Branch
-  description: The Git branch to install.
-  env_variable: GIT_BRANCH
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 3
-  name: User Uploaded Files
-  description: |-
-    Skip all the install stuff if you are letting a user upload files.
-    0 = false (default)
-    1 = true
-  env_variable: USER_UPLOAD
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 4
-  name: Auto Update
-  description: |-
-    Pull the latest files on startup when using a Git Repository.
-    0 = false (default)
-    1 = true
-  env_variable: AUTO_UPDATE
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 5
-  name: Git Username
-  description: Git username for authentication.
-  env_variable: GIT_USERNAME
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 6
-  name: Git Access Token
-  description: Git access token for authentication.
-  env_variable: GIT_ACCESS_TOKEN
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
+  -
+    sort: 4
+    name: 'Auto Update'
+    description: |-
+      Pull the latest files on startup when using a Git Repository.
+      0 = false (default)
+      1 = true
+    env_variable: AUTO_UPDATE
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 6
+    name: 'Git Access Token'
+    description: 'Git access token for authentication.'
+    env_variable: GIT_ACCESS_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 1
+    name: 'Git Repository Address'
+    description: 'The Git repository address to clone .'
+    env_variable: GIT_ADDRESS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 2
+    name: 'Git Branch'
+    description: 'The Git branch to install.'
+    env_variable: GIT_BRANCH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 5
+    name: 'Git Username'
+    description: 'Git username for authentication.'
+    env_variable: GIT_USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 3
+    name: 'User Uploaded Files'
+    description: |-
+      Skip all the install stuff if you are letting a user upload files.
+      0 = false (default)
+      1 = true
+    env_variable: USER_UPLOAD
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean

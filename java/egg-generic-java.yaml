@@ -2,32 +2,33 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: null
-exported_at: '2024-06-02T14:43:51+00:00'
-name: Generic Java
+exported_at: '2026-08-22T09:27:25+00:00'
+name: 'Generic Java'
 author: sneaky@sneakyhub.com
 uuid: a3ff6992-6e87-42b8-b8ca-cde33f38a435
-description: Creates a container that runs java.
-tags: {}
-features: {}
+description: 'Creates a container that runs java.'
+icon: null
+tags: {  }
+features: {  }
 docker_images:
-  Java 26: ghcr.io/pelican-eggs/yolks:java_26
-  Java 25: ghcr.io/pelican-eggs/yolks:java_25
-  Java 22: ghcr.io/pelican-eggs/yolks:java_22
-  Java 21: ghcr.io/pelican-eggs/yolks:java_21
-  Java 19: ghcr.io/pelican-eggs/yolks:java_19
-  Java 17: ghcr.io/pelican-eggs/yolks:java_17
-  Java 16: ghcr.io/pelican-eggs/yolks:java_16
-  Java 11: ghcr.io/pelican-eggs/yolks:java_11
-  Java 8: ghcr.io/pelican-eggs/yolks:java_8
-file_denylist: {}
+  'Java 26': 'ghcr.io/pelican-eggs/yolks:java_26'
+  'Java 25': 'ghcr.io/pelican-eggs/yolks:java_25'
+  'Java 22': 'ghcr.io/pelican-eggs/yolks:java_22'
+  'Java 21': 'ghcr.io/pelican-eggs/yolks:java_21'
+  'Java 19': 'ghcr.io/pelican-eggs/yolks:java_19'
+  'Java 17': 'ghcr.io/pelican-eggs/yolks:java_17'
+  'Java 16': 'ghcr.io/pelican-eggs/yolks:java_16'
+  'Java 11': 'ghcr.io/pelican-eggs/yolks:java_11'
+  'Java 8': 'ghcr.io/pelican-eggs/yolks:java_8'
+file_denylist: {  }
 startup_commands:
-  Default: java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}
+  Default: 'java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}'
 config:
-  files: {}
+  files: {  }
   startup:
     done:
-    - change this text
-  logs: {}
+      - 'change this text'
+  logs: {  }
   stop: ^C
 scripts:
   installation:
@@ -42,17 +43,18 @@ scripts:
       apt install -y curl jq
 
       cd /mnt/server
-    container: ghcr.io/pelican-eggs/installers:debian
+    container: 'ghcr.io/pelican-eggs/installers:debian'
     entrypoint: bash
 variables:
-- sort: 1
-  name: JAR File
-  description: ''
-  env_variable: JARFILE
-  default_value: server.jar
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - string
-  - max:50
+  -
+    sort: 1
+    name: 'JAR File'
+    description: ''
+    env_variable: JARFILE
+    default_value: server.jar
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:50'

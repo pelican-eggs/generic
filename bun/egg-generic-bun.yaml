@@ -2,30 +2,29 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: null
-exported_at: '2024-06-02T14:43:54+00:00'
-name: Generic Bun
+exported_at: '2026-08-22T09:27:10+00:00'
+name: 'Generic Bun'
 author: mratox@protonmail.com
 uuid: b62c6de5-7034-4853-970f-ed5b57c5083b
-description: Bun is an incredibly fast JavaScript runtime, transpiler bundler, and
-  npm package manager all-in-one.
-tags: {}
-features: {}
+description: |-
+  Bun is an incredibly fast JavaScript runtime, transpiler bundler, and npm package manager
+  all-in-one.
+icon: null
+tags: {  }
+features: {  }
 docker_images:
-  Bun Latest: ghcr.io/pelican-eggs/yolks:bun_latest
-  Bun Canary: ghcr.io/pelican-eggs/yolks:bun_canary
-file_denylist: {}
+  'Bun Latest': 'ghcr.io/pelican-eggs/yolks:bun_latest'
+  'Bun Canary': 'ghcr.io/pelican-eggs/yolks:bun_canary'
+file_denylist: {  }
 startup_commands:
-  Default: if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if
-    [[ ! -z ${BUN_PACKAGES} ]]; then bun install ${BUN_PACKAGES}; fi; if [[ ! -z ${RMBUN_PACKAGES}
-    ]]; then bun remove ${RMBUN_PACKAGES}; fi; if [ -f /home/container/package.json
-    ]; then bun install; fi; bun run {{MAIN_FILE}}
+  Default: 'if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if [[ ! -z ${BUN_PACKAGES} ]]; then bun install ${BUN_PACKAGES}; fi; if [[ ! -z ${RMBUN_PACKAGES} ]]; then bun remove ${RMBUN_PACKAGES}; fi; if [ -f /home/container/package.json ]; then bun install; fi; bun run {{MAIN_FILE}}'
 config:
-  files: {}
+  files: {  }
   startup:
     done:
-    - change this text 1
-    - change this text 2
-  logs: {}
+      - 'change this text 1'
+      - 'change this text 2'
+  logs: {  }
   stop: ^^C
 scripts:
   installation:
@@ -103,106 +102,115 @@ scripts:
       echo "-----------------------------------------"
       echo "Installation completed..."
       echo "-----------------------------------------"
-    container: ghcr.io/pelican-eggs/installers:debian
+    container: 'ghcr.io/pelican-eggs/installers:debian'
     entrypoint: bash
 variables:
-- sort: 1
-  name: Git Repository Address
-  description: The Git repository address to clone .
-  env_variable: GIT_ADDRESS
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 2
-  name: User Uploaded Files
-  description: |-
-    Skip all the install stuff if you are letting a user upload files.
-    0 = false (default)
-    1 = true
-  env_variable: USER_UPLOAD
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 3
-  name: Auto Update
-  description: |-
-    Pull the latest files on startup when using a Git Repository.
-    0 = false (default)
-    1 = true
-  env_variable: AUTO_UPDATE
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 4
-  name: Main file
-  description: The main file passed to the bun run command
-  env_variable: MAIN_FILE
-  default_value: index.js
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - string
-- sort: 5
-  name: Additional Bun Packages
-  description: |-
-    Install additional bun packages.
-    Use spaces to separate
-  env_variable: BUN_PACKAGES
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 6
-  name: Uninstall Bun Packages
-  description: |-
-    Uninstall bun packages.
-    Use spaces to separate
-  env_variable: RMBUN_PACKAGES
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 7
-  name: Git Branch
-  description: The Git branch to install.
-  env_variable: BRANCH
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 8
-  name: Git Username
-  description: Git username for authentication.
-  env_variable: USERNAME
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 9
-  name: Git Access Token
-  description: Git access token for authentication.
-  env_variable: ACCESS_TOKEN
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
+  -
+    sort: 9
+    name: 'Git Access Token'
+    description: 'Git access token for authentication.'
+    env_variable: ACCESS_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 3
+    name: 'Auto Update'
+    description: |-
+      Pull the latest files on startup when using a Git Repository.
+      0 = false (default)
+      1 = true
+    env_variable: AUTO_UPDATE
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 7
+    name: 'Git Branch'
+    description: 'The Git branch to install.'
+    env_variable: BRANCH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 5
+    name: 'Additional Bun Packages'
+    description: |-
+      Install additional bun packages.
+      Use spaces to separate
+    env_variable: BUN_PACKAGES
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 1
+    name: 'Git Repository Address'
+    description: 'The Git repository address to clone .'
+    env_variable: GIT_ADDRESS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 4
+    name: 'Main file'
+    description: 'The main file passed to the bun run command'
+    env_variable: MAIN_FILE
+    default_value: index.js
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+  -
+    sort: 6
+    name: 'Uninstall Bun Packages'
+    description: |-
+      Uninstall bun packages.
+      Use spaces to separate
+    env_variable: RMBUN_PACKAGES
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 2
+    name: 'User Uploaded Files'
+    description: |-
+      Skip all the install stuff if you are letting a user upload files.
+      0 = false (default)
+      1 = true
+    env_variable: USER_UPLOAD
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 8
+    name: 'Git Username'
+    description: 'Git username for authentication.'
+    env_variable: USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string

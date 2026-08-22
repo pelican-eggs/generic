@@ -2,8 +2,8 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: null
-exported_at: '2024-06-02T14:43:54+00:00'
-name: Generic Dart
+exported_at: '2026-08-22T09:27:18+00:00'
+name: 'Generic Dart'
 author: alden@knoban.com
 uuid: 8328a5cc-4250-4d30-a66a-faf83393605e
 description: |-
@@ -11,26 +11,26 @@ description: |-
 
   This will clone a dart CLI application. it defaults to master if no branch is specified.
 
-  Installs the pubspec.yaml packages on run. If you set user_upload then I assume you know what you are doing.
-tags: {}
-features: {}
+  Installs the pubspec.yaml packages on run. If you set user_upload then I assume you know what you
+  are doing.
+icon: null
+tags: {  }
+features: {  }
 docker_images:
-  Dart Stable: ghcr.io/pelican-eggs/yolks:dart_stable
-  Dart 3.3: ghcr.io/pelican-eggs/yolks:dart_3.3
-  Dart 2.19: ghcr.io/pelican-eggs/yolks:dart_2.19
-  Dart 2.18: ghcr.io/pelican-eggs/yolks:dart_2.18
-  Dart 2.17: ghcr.io/pelican-eggs/yolks:dart_2.17
-file_denylist: {}
+  'Dart Stable': 'ghcr.io/pelican-eggs/yolks:dart_stable'
+  'Dart 3.3': 'ghcr.io/pelican-eggs/yolks:dart_3.3'
+  'Dart 2.19': 'ghcr.io/pelican-eggs/yolks:dart_2.19'
+  'Dart 2.18': 'ghcr.io/pelican-eggs/yolks:dart_2.18'
+  'Dart 2.17': 'ghcr.io/pelican-eggs/yolks:dart_2.17'
+file_denylist: {  }
 startup_commands:
-  Default: if [[ -d .git ]] && [[ {{AUTO_RESET}} == "1" ]]; then git reset --hard;
-    fi; if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; dart
-    pub get; dart run
+  Default: 'if [[ -d .git ]] && [[ {{AUTO_RESET}} == "1" ]]; then git reset --hard; fi; if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; dart pub get; dart run'
 config:
-  files: {}
+  files: {  }
   startup:
     done:
-    - change this part
-  logs: {}
+      - 'change this part'
+  logs: {  }
   stop: ^^C
 scripts:
   installation:
@@ -94,88 +94,95 @@ scripts:
 
       echo -e "install complete"
       exit 0
-    container: ghcr.io/pelican-eggs/installers:debian
+    container: 'ghcr.io/pelican-eggs/installers:debian'
     entrypoint: bash
 variables:
-- sort: 1
-  name: Git Repo Address
-  description: |-
-    GitHub Repo to clone
+  -
+    sort: 7
+    name: 'Git Access Token'
+    description: |-
+      Password to use with git.
 
-    I.E. https://github.com/kNoAPP/repo_name
-  env_variable: GIT_ADDRESS
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 2
-  name: Install Branch
-  description: The branch of the bot to install.
-  env_variable: BRANCH
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 3
-  name: User Uploaded Files
-  description: |-
-    Skip all the install stuff if you are letting a user upload files.
+      It's best practice to use a Personal Access Token.
+      https://github.com/settings/tokens
+      https://gitlab.com/-/profile/personal_access_tokens
+    env_variable: ACCESS_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 5
+    name: 'Auto Reset'
+    description: 'Hard reset the latest files on startup when using a GitHub repo.'
+    env_variable: AUTO_RESET
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 4
+    name: 'Auto Update'
+    description: 'Pull the latest files on startup when using a GitHub repo.'
+    env_variable: AUTO_UPDATE
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 2
+    name: 'Install Branch'
+    description: 'The branch of the bot to install.'
+    env_variable: BRANCH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 1
+    name: 'Git Repo Address'
+    description: |-
+      GitHub Repo to clone
 
-    0 = false (default)
-    1 = true
-  env_variable: USER_UPLOAD
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 4
-  name: Auto Update
-  description: Pull the latest files on startup when using a GitHub repo.
-  env_variable: AUTO_UPDATE
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 5
-  name: Auto Reset
-  description: Hard reset the latest files on startup when using a GitHub repo.
-  env_variable: AUTO_RESET
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 6
-  name: Git Username
-  description: Username to auth with git.
-  env_variable: USERNAME
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 7
-  name: Git Access Token
-  description: |-
-    Password to use with git.
+      I.E. https://github.com/kNoAPP/repo_name
+    env_variable: GIT_ADDRESS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 3
+    name: 'User Uploaded Files'
+    description: |-
+      Skip all the install stuff if you are letting a user upload files.
 
-    It's best practice to use a Personal Access Token.
-    https://github.com/settings/tokens
-    https://gitlab.com/-/profile/personal_access_tokens
-  env_variable: ACCESS_TOKEN
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
+      0 = false (default)
+      1 = true
+    env_variable: USER_UPLOAD
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 6
+    name: 'Git Username'
+    description: 'Username to auth with git.'
+    env_variable: USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string

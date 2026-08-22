@@ -2,35 +2,35 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: null
-exported_at: '2024-06-02T14:43:56+00:00'
-name: Generic Golang
+exported_at: '2026-08-22T09:27:23+00:00'
+name: 'Generic Golang'
 author: parker@parkervcp.com
 uuid: b1c18867-5be4-4124-9ce2-8924339de747
 description: |-
   A generic golang egg that compiles the application and saves an executable
 
   Meant to be customized before it is used.
-tags: {}
-features: {}
+icon: null
+tags: {  }
+features: {  }
 docker_images:
-  Go 1.23: ghcr.io/pelican-eggs/yolks:go_1.23
-  Go 1.22: ghcr.io/pelican-eggs/yolks:go_1.22
-  Go 1.21: ghcr.io/pelican-eggs/yolks:go_1.21
-  Go 1.20: ghcr.io/pelican-eggs/yolks:go_1.20
-  Go 1.19: ghcr.io/pelican-eggs/yolks:go_1.19
-  Go 1.18: ghcr.io/pelican-eggs/yolks:go_1.18
-  Debian: ghcr.io/pelican-eggs/yolks:debian
-file_denylist: {}
+  'Go 1.23': 'ghcr.io/pelican-eggs/yolks:go_1.23'
+  'Go 1.22': 'ghcr.io/pelican-eggs/yolks:go_1.22'
+  'Go 1.21': 'ghcr.io/pelican-eggs/yolks:go_1.21'
+  'Go 1.20': 'ghcr.io/pelican-eggs/yolks:go_1.20'
+  'Go 1.19': 'ghcr.io/pelican-eggs/yolks:go_1.19'
+  'Go 1.18': 'ghcr.io/pelican-eggs/yolks:go_1.18'
+  Debian: 'ghcr.io/pelican-eggs/yolks:debian'
+file_denylist: {  }
 startup_commands:
-  Default: if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if
-    [ -f go.mod ]; then go build -o {{EXECUTABLE}} .; fi; ./{{EXECUTABLE}}
+  Default: 'if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == "1" ]]; then git pull; fi; if [ -f go.mod ]; then go build -o {{EXECUTABLE}} .; fi; ./{{EXECUTABLE}}'
 config:
-  files: {}
+  files: {  }
   startup:
     done:
-    - change this text 1
-    - change this text 2
-  logs: {}
+      - 'change this text 1'
+      - 'change this text 2'
+  logs: {  }
   stop: ^C
 scripts:
   installation:
@@ -103,82 +103,89 @@ scripts:
 
       echo -e "install complete"
       exit 0
-    container: golang:1.23-bookworm
+    container: 'golang:1.23-bookworm'
     entrypoint: bash
 variables:
-- sort: 1
-  name: Git Repository Address
-  description: The Git repository address to clone.
-  env_variable: GIT_ADDRESS
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 2
-  name: Install Branch
-  description: The Git branch to install.
-  env_variable: BRANCH
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 3
-  name: Git Username
-  description: Username to auth with git.
-  env_variable: USERNAME
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 4
-  name: Git Access Token
-  description: Git access token for authentication.
-  env_variable: ACCESS_TOKEN
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 5
-  name: User Uploaded Files
-  description: |-
-    Skip all the install stuff if you are letting a user upload files.
-    0 = false (default)
-    1 = true
-  env_variable: USER_UPLOAD
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 6
-  name: Auto Update
-  description: |-
-    Pull the latest files on startup when using a Git Repository.
-    0 = false (default)
-    1 = true
-  env_variable: AUTO_UPDATE
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 7
-  name: Executable
-  description: This is the executable binary name produced from the build.
-  env_variable: EXECUTABLE
-  default_value: app
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - string
+  -
+    sort: 4
+    name: 'Git Access Token'
+    description: 'Git access token for authentication.'
+    env_variable: ACCESS_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 6
+    name: 'Auto Update'
+    description: |-
+      Pull the latest files on startup when using a Git Repository.
+      0 = false (default)
+      1 = true
+    env_variable: AUTO_UPDATE
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 2
+    name: 'Install Branch'
+    description: 'The Git branch to install.'
+    env_variable: BRANCH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 7
+    name: Executable
+    description: 'This is the executable binary name produced from the build.'
+    env_variable: EXECUTABLE
+    default_value: app
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+  -
+    sort: 1
+    name: 'Git Repository Address'
+    description: 'The Git repository address to clone.'
+    env_variable: GIT_ADDRESS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 5
+    name: 'User Uploaded Files'
+    description: |-
+      Skip all the install stuff if you are letting a user upload files.
+      0 = false (default)
+      1 = true
+    env_variable: USER_UPLOAD
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 3
+    name: 'Git Username'
+    description: 'Username to auth with git.'
+    env_variable: USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string

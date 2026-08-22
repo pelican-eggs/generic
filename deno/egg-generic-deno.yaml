@@ -2,25 +2,26 @@ _comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
 meta:
   version: PLCN_v3
   update_url: null
-exported_at: '2025-04-19T16:22:05+00:00'
-name: Generic Deno
+exported_at: '2026-08-22T09:27:16+00:00'
+name: 'Generic Deno'
 author: parker@parkervcp.com
 uuid: 9bf4389f-7df3-422e-b8ff-0c1e96c7da51
-description: A generic egg to run deno code.
-tags: {}
-features: {}
+description: 'A generic egg to run deno code.'
+icon: null
+tags: {  }
+features: {  }
 docker_images:
-  Debian: ghcr.io/pelican-eggs/yolks:debian
-  Alpine: ghcr.io/pelican-eggs/yolks:alpine
-file_denylist: {}
+  Debian: 'ghcr.io/pelican-eggs/yolks:debian'
+  Alpine: 'ghcr.io/pelican-eggs/yolks:alpine'
+file_denylist: {  }
 startup_commands:
-  Default: ./deno run {{JS_FILE}}
+  Default: './deno run {{JS_FILE}}'
 config:
-  files: {}
+  files: {  }
   startup:
     done:
-    - change this part
-  logs: {}
+      - 'change this part'
+  logs: {  }
   stop: ^C
 scripts:
   installation:
@@ -136,92 +137,99 @@ scripts:
 
       echo -e "install complete"
       exit 0
-    container: ghcr.io/pelican-eggs/installers:debian
+    container: 'ghcr.io/pelican-eggs/installers:debian'
     entrypoint: bash
 variables:
-- sort: 1
-  name: Git Username
-  description: Username to auth with git.
-  env_variable: USERNAME
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 2
-  name: Git Access Token
-  description: |-
-    Password to use with git.
+  -
+    sort: 2
+    name: 'Git Access Token'
+    description: |-
+      Password to use with git.
 
-    It's best practice to use a Personal Access Token.
-    https://github.com/settings/tokens
-    https://gitlab.com/-/profile/personal_access_tokens
-  env_variable: ACCESS_TOKEN
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 3
-  name: Git Repo Address
-  description: |-
-    GitHub Repo to clone
+      It's best practice to use a Personal Access Token.
+      https://github.com/settings/tokens
+      https://gitlab.com/-/profile/personal_access_tokens
+    env_variable: ACCESS_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 5
+    name: 'Git Branch'
+    description: |-
+      What branch to pull from github.
 
-    I.E. https://github.com/parkervcp/repo_name
-  env_variable: GIT_ADDRESS
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 4
-  name: User Uploaded Files
-  description: |-
-    Skip all the install stuff if you are letting a user upload files.
+      Default is blank to pull the repo default branch
+    env_variable: BRANCH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 3
+    name: 'Git Repo Address'
+    description: |-
+      GitHub Repo to clone
 
-    0 = false (default)
-    1 = true
-  env_variable: USER_UPLOAD
-  default_value: '0'
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - boolean
-- sort: 5
-  name: Git Branch
-  description: |-
-    What branch to pull from github.
+      I.E. https://github.com/parkervcp/repo_name
+    env_variable: GIT_ADDRESS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 6
+    name: 'Bot js file'
+    description: 'The JavaScript file to run'
+    env_variable: JS_FILE
+    default_value: bot.js
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:20'
+  -
+    sort: 4
+    name: 'User Uploaded Files'
+    description: |-
+      Skip all the install stuff if you are letting a user upload files.
 
-    Default is blank to pull the repo default branch
-  env_variable: BRANCH
-  default_value: ''
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
-- sort: 6
-  name: Bot js file
-  description: The JavaScript file to run
-  env_variable: JS_FILE
-  default_value: bot.js
-  user_viewable: true
-  user_editable: true
-  rules:
-  - required
-  - string
-  - max:20
-- sort: 7
-  name: Deno Version
-  description: The Deno version to download (e.g. latest, v1.46.0)
-  env_variable: VERSION
-  default_value: latest
-  user_viewable: true
-  user_editable: true
-  rules:
-  - nullable
-  - string
+      0 = false (default)
+      1 = true
+    env_variable: USER_UPLOAD
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - boolean
+  -
+    sort: 1
+    name: 'Git Username'
+    description: 'Username to auth with git.'
+    env_variable: USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+  -
+    sort: 7
+    name: 'Deno Version'
+    description: 'The Deno version to download (e.g. latest, v1.46.0)'
+    env_variable: VERSION
+    default_value: latest
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string

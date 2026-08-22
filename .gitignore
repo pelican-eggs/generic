@@ -5,3 +5,5 @@ node_modules/
 .idea
 yolks/
 test/
+exported/
+pr.md
