@@ -1,13 +1,10 @@
 # Go Language Generic
 
-This egg is designed to run any generic Go application, allowing users to pull their own Go source code from a Github repository.
+This egg is designed to run any generic Go application or bot, allowing users to pull their Go source code from a Git repository or upload their own files.
 
-The startup configs and commands may need changing to actually function properly.
+The startup configs and commands may need changing to match your application entrypoint.
 
-Users cannot upload their own code as this is built to build the resulting bot.
-
-`GO_PACKAGE` is the variable for the Go repo i.e. `github.com/aurieh/ddg-ng`
-`EXECUTABLE` is the variable for the executable that is built i.e. `ddg-ng`
+`EXECUTABLE` is the name of the executable binary that is built (default: `app`).
 
 ## Configuration
 

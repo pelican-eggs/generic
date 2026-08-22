@@ -1,0 +1,227 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: null
+exported_at: '2025-04-19T16:22:05+00:00'
+name: Generic Deno
+author: parker@parkervcp.com
+uuid: 9bf4389f-7df3-422e-b8ff-0c1e96c7da51
+description: A generic egg to run deno code.
+tags: {}
+features: {}
+docker_images:
+  Debian: ghcr.io/pelican-eggs/yolks:debian
+  Alpine: ghcr.io/pelican-eggs/yolks:alpine
+file_denylist: {}
+startup_commands:
+  Default: ./deno run {{JS_FILE}}
+config:
+  files: {}
+  startup:
+    done:
+    - change this part
+  logs: {}
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      # Deno Bot Installation Script
+      #
+      # Server Files: /mnt/server
+
+      apt update
+      apt install -y git curl jq file unzip
+
+      mkdir -p /mnt/server
+      cd /mnt/server
+
+      if [ "${USER_UPLOAD}" == "true" ] || [ "${USER_UPLOAD}" == "1" ]; then
+          echo -e "assuming user knows what they are doing have a good day."
+          exit 0
+      fi
+
+      ## add git ending if it's not on the address
+      if [[ ${GIT_ADDRESS} != *.git ]]; then
+          GIT_ADDRESS=${GIT_ADDRESS}.git
+      fi
+
+      if [ -z "${USERNAME}" ] && [ -z "${ACCESS_TOKEN}" ]; then
+          echo -e "using anon api call"
+      else
+          GIT_ADDRESS="https://${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)"
+      fi
+
+      ## pull git js bot repo
+      if [ "$(ls -A /mnt/server)" ]; then
+          echo -e "/mnt/server directory is not empty."
+          if [ -d .git ]; then
+              echo -e ".git directory exists"
+              if [ -f .git/config ]; then
+                  echo -e "loading info from git config"
+                  ORIGIN=$(git config --get remote.origin.url)
+              else
+                  echo -e "files found with no git config"
+                  echo -e "closing out without touching things to not break anything"
+                  exit 10
+              fi
+          fi
+
+          if [ "${ORIGIN}" == "${GIT_ADDRESS}" ]; then
+              echo "pulling latest from github"
+              git pull
+          fi
+      else
+          echo -e "/mnt/server is empty.\ncloning files into repo"
+          if [ -z ${BRANCH} ]; then
+              echo -e "cloning default branch"
+              git clone ${GIT_ADDRESS} .
+          else
+              echo -e "cloning ${BRANCH}'"
+              git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .
+          fi
+
+      fi
+
+      ## filters to make sure the correct file is downloaded.
+      GITHUB_PACKAGE=denoland/deno
+      EXEC=deno-
+      OS=linux
+      NOT=sha256sum
+
+      ## get release info and download links
+      ## removes the body of messages as those may break jq
+      LATEST_JSON="$(curl -sSL "https://api.github.com/repos/denoland/deno/releases/latest" | jq 'del(.body)')"
+      RELEASES="$(curl -sSL "https://api.github.com/repos/${GITHUB_PACKAGE}/releases" | jq 'del(.[].body)')"
+
+      if [ -z "${VERSION}" ] || [ "${VERSION}" == "latest" ]; then
+          # gets the download url filtered by arch, executable name, os name, and doesn't show sha256sum files.
+          DOWNLOAD_URL="$(echo "${LATEST_JSON}" | jq -r --arg ARCH "$(uname -m)" --arg EXEC "${EXEC}" --arg OS ${OS} --arg NOT ${NOT} '.assets | .[].browser_download_url | select(contains($ARCH)) | select(contains($EXEC)) | select(contains($OS)) | select(contains($NOT) | not)')"
+      else
+          VERSION_CHECK="$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .tag_name')"
+          if [ "${VERSION}" == "${VERSION_CHECK}" ]; then
+              DOWNLOAD_LINK="$(echo ${RELEASES} | jq -r --arg ARCH "$(uname -m)" --arg VERSION "${VERSION}" --arg EXEC "${EXEC}" --arg OS ${OS} --arg NOT ${NOT} '.[] | select(.tag_name==$VERSION) | .assets | .[].browser_download_url | select(contains($EXEC)) | select(contains($ARCH)) | select(contains($OS)) | select(contains($NOT) | not)')"
+          else
+              echo -e "defaulting to latest release"
+              DOWNLOAD_LINK="$(echo "${LATEST_JSON}" | jq -r --arg ARCH "$(uname -m)" --arg EXEC "${EXEC}" --arg OS ${OS} --arg NOT ${NOT} '.assets | .[].browser_download_url | select(contains($EXEC)) | select(contains($ARCH)) | select(contains($OS)) | select(contains($NOT) | not)')"
+          fi
+      fi
+
+      if [ ! -z "${DOWNLOAD_URL}" ]; then
+          if curl --output /dev/null --silent --head --fail ${DOWNLOAD_URL}; then
+              echo -e "link is valid. setting download link to ${DOWNLOAD_URL}"
+              DOWNLOAD_LINK=${DOWNLOAD_URL}
+          else
+              echo -e "link is invalid closing out"
+              exit 2
+          fi
+      fi
+
+      curl -sSL $DOWNLOAD_LINK -o ${DOWNLOAD_LINK##*/}
+
+      FILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*/} | cut -d',' -f2 | cut -d' ' -f2)
+      if [ "$FILETYPE" == "gzip" ]; then
+          tar xzvf ${DOWNLOAD_LINK##*/}
+      elif [ "$FILETYPE" == "Zip" ]; then
+          unzip -o ${DOWNLOAD_LINK##*/}
+      elif [ "$FILETYPE" == "XZ" ]; then
+          tar xvf ${DOWNLOAD_LINK##*/}
+      else
+          echo -e "unknown filetype. Exiting"
+          exit 2
+      fi
+
+      ## cleaning up downloaded file
+      rm -f ${DOWNLOAD_LINK##*/}
+
+      echo -e "install complete"
+      exit 0
+    container: ghcr.io/pelican-eggs/installers:debian
+    entrypoint: bash
+variables:
+- sort: 1
+  name: Git Username
+  description: Username to auth with git.
+  env_variable: USERNAME
+  default_value: ''
+  user_viewable: true
+  user_editable: true
+  rules:
+  - nullable
+  - string
+- sort: 2
+  name: Git Access Token
+  description: |-
+    Password to use with git.
+
+    It's best practice to use a Personal Access Token.
+    https://github.com/settings/tokens
+    https://gitlab.com/-/profile/personal_access_tokens
+  env_variable: ACCESS_TOKEN
+  default_value: ''
+  user_viewable: true
+  user_editable: true
+  rules:
+  - nullable
+  - string
+- sort: 3
+  name: Git Repo Address
+  description: |-
+    GitHub Repo to clone
+
+    I.E. https://github.com/parkervcp/repo_name
+  env_variable: GIT_ADDRESS
+  default_value: ''
+  user_viewable: true
+  user_editable: true
+  rules:
+  - nullable
+  - string
+- sort: 4
+  name: User Uploaded Files
+  description: |-
+    Skip all the install stuff if you are letting a user upload files.
+
+    0 = false (default)
+    1 = true
+  env_variable: USER_UPLOAD
+  default_value: '0'
+  user_viewable: true
+  user_editable: true
+  rules:
+  - required
+  - boolean
+- sort: 5
+  name: Git Branch
+  description: |-
+    What branch to pull from github.
+
+    Default is blank to pull the repo default branch
+  env_variable: BRANCH
+  default_value: ''
+  user_viewable: true
+  user_editable: true
+  rules:
+  - nullable
+  - string
+- sort: 6
+  name: Bot js file
+  description: The JavaScript file to run
+  env_variable: JS_FILE
+  default_value: bot.js
+  user_viewable: true
+  user_editable: true
+  rules:
+  - required
+  - string
+  - max:20
+- sort: 7
+  name: Deno Version
+  description: The Deno version to download (e.g. latest, v1.46.0)
+  env_variable: VERSION
+  default_value: latest
+  user_viewable: true
+  user_editable: true
+  rules:
+  - nullable
+  - string

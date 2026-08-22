@@ -10,12 +10,15 @@
     "description": "Creates a container that runs java.",
     "features": null,
     "docker_images": {
-        "ghcr.io/parkervcp/yolks:java_11": "ghcr.io/parkervcp/yolks:java_11",
-        "ghcr.io/parkervcp/yolks:java_16": "ghcr.io/parkervcp/yolks:java_16",
-        "ghcr.io/parkervcp/yolks:java_17": "ghcr.io/parkervcp/yolks:java_17",
-        "ghcr.io/parkervcp/yolks:java_19": "ghcr.io/parkervcp/yolks:java_19",
-        "ghcr.io/parkervcp/yolks:java_21": "ghcr.io/parkervcp/yolks:java_21",
-        "ghcr.io/parkervcp/yolks:java_8": "ghcr.io/parkervcp/yolks:java_8"
+        "Java 26": "ghcr.io/pelican-eggs/yolks:java_26",
+        "Java 25": "ghcr.io/pelican-eggs/yolks:java_25",
+        "Java 22": "ghcr.io/pelican-eggs/yolks:java_22",
+        "Java 21": "ghcr.io/pelican-eggs/yolks:java_21",
+        "Java 19": "ghcr.io/pelican-eggs/yolks:java_19",
+        "Java 17": "ghcr.io/pelican-eggs/yolks:java_17",
+        "Java 16": "ghcr.io/pelican-eggs/yolks:java_16",
+        "Java 11": "ghcr.io/pelican-eggs/yolks:java_11",
+        "Java 8": "ghcr.io/pelican-eggs/yolks:java_8"
     },
     "file_denylist": [],
     "startup": "java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}",
@@ -27,17 +30,17 @@
     },
     "scripts": {
         "installation": {
-            "container": "ghcr.io/parkervcp/yolks:debian",
+            "container": "ghcr.io/pelican-eggs/installers:debian",
             "entrypoint": "bash",
             "script": "#!/bin/bash\r\n# Java Installation Script\r\n#\r\n# Server Files: /mnt/server\r\nPROJECT=java\r\n\r\napt update\r\napt install -y curl jq\r\n\r\ncd /mnt/server"
         }
     },
     "variables": [
         {
-            "name": "JAR FILE",
+            "name": "JAR File",
             "description": "",
             "env_variable": "JARFILE",
-            "default_value": "sneakyhub.jar",
+            "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:50",
