@@ -3,3 +3,7 @@ node_modules/
 .vuepress/*
 .vscode
 .idea
+yolks/
+test/
+exported/
+pr.md
