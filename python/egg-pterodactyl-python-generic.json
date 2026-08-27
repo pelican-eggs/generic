@@ -1,5 +1,5 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PELICAN PANEL - PELICAN.DEV",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
@@ -7,7 +7,7 @@
     "exported_at": "2025-11-11T09:56:17+00:00",
     "name": "python generic",
     "author": "parker@parkervcp.com",
-    "description": "A Generic Python Egg for Pelican & Pterodactyl\n\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
+    "description": "A Generic Python Egg for Pelican & Pelican\n\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
     "features": null,
     "docker_images": {
         "Python 3.14": "ghcr.io\/parkervcp\/yolks:python_3.14",
